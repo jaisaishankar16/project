@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Form</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='register.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* CSS to style the checkbox */
+    .checkbox-container {
+      display: inline-block;
+      position: relative;
+      padding-left: 22px;
+      margin-top: 9px;
+      cursor: pointer;
+      font-size: 14px; /* Adjust font size as needed */
+    }
+
+    .checkbox-container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 18px; /* Adjust height as needed */
+      width: 18px; /* Adjust width as needed */
+      background-color: #eee; /* Background color of the checkbox */
+      border-radius: 3px; /* Adjust border-radius as needed */
+    }
+
+    .checkbox-container:hover input ~ .checkmark {
+      background-color: #ccc; /* Background color of the checkbox on hover */
+    }
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    .checkbox-container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    .checkbox-container .checkmark:after {
+      left: 5px; /* Adjust position as needed */
+      top: 2px; /* Adjust position as needed */
+      width: 5px; /* Adjust width as needed */
+      height: 10px; /* Adjust height as needed */
+      border: solid rgb(74, 74, 230); /* Border color of the checkmark */
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Login</div>
+    <div class="content">
+      <form action="/login" method="POST">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" id="email" name="email" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <label class="checkbox-container">Show Password
+              <input type="checkbox" id="showPasswordCheckbox">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Login">
+        </div>
+      </form>
+      <h4>Create an account &nbsp;<a href="{{ url_for('register') }}">Register</a></h4>
+      <br>
+      {% if error %}
+        <h4><center>{{ error }}</center></h4>
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("showPasswordCheckbox").addEventListener("change", function() {
+      var passwordField = document.getElementById("password");
+      passwordField.type = this.checked ? "text" : "password";
+    });
+  </script>
+</body>
+</html>

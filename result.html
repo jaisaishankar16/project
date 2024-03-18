@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Invoice Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  /* padding-top: 20px; */
+}
+
+.left {
+  left: 0;
+  /* background-color: #71b7e6; */
+}
+
+.right {
+  right: 0;
+  /* background-color: #9b59b6; */
+}
+
+.centered1 {
+  padding-bottom: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered img {
+  height:400px;
+}
+
+
+.centered {
+  text-align: center;
+  max-width: 600px; /* Adjust this value to your desired maximum width */
+  margin: 0 auto;
+  padding: 20px;
+  border: 3.5px solid #ccc;
+  border-radius: 20px;
+}
+
+.centered h2 {
+  margin: 10px 0;
+}
+
+.centered ul {
+  list-style: none;
+  padding: 0;
+  display: block;
+  font-size: 1.5em;
+  margin-top: 0.60em;
+  margin-bottom: 0.60em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.centered ul li {
+  margin: 5px 0;
+}
+</style>
+</head>
+<body>
+<div class="split left">
+  <div class="centered1" style="width: 500px">
+    <div id="img-container" style="width: 0px">
+      <img src="{{image}}" >
+    </div>
+    <h2 style="padding-right: 100px;">Uploaded Invoice Preview</h2>
+    <span style="padding-right: 110px;">Hover your mouse to zoom</span>
+  </div>
+
+</div>
+
+<div class="split right">
+  <h1 style="font-size: 55px;"><center>Invoice Details</center></h1>
+  <div class="centered">
+    <h2>Date: {{ invoice_date }}</h2>
+    <h2>Receipt No: {{ invoice_receipt_no }}</h2>
+    <h2>Merchant Name: {{ invoice_merchant_name }}</h2>
+    <h2>Merchant Tax No: {{ invoice_merchant_tax_no }}</h2>
+    <h2>Merchant Address: {{ invoice_merchant_address }}</h2>
+    <h2>Items:</h2>
+    <ul>
+      <!-- {% for item in invoice_items %}
+          <li>{{ item }}</li>
+      {% endfor %} -->
+    </ul>
+    <h2>Total Amount: {{ invoice_total }}</h2>
+  </div>
+</div>
+<br><br><br><br><br><br><br>
+<script>
+  var options = {
+      width: 400,
+      height:250,
+      zoomWidth: 500,
+      offset: {vertical: 0, horizontal: 10},
+      scale:1.5
+  };   
+    new ImageZoom(document.getElementById("img-container"), options);
+</script>
+</body>
+</html>
+     
